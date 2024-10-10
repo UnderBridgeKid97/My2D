@@ -10,7 +10,7 @@ namespace My2D
         private Rigidbody2D rb2D;
 
         // 플레이어 걷기 속도
-        [SerializeField] private float WALKSpeed = 4F;
+        [SerializeField] private float WalkSpeed = 4F;
 
         // 플레이어 이동과 관련된 입력값
         private Vector2 inputMove;
@@ -27,13 +27,14 @@ namespace My2D
         private void FixedUpdate()
         {
             // 플레이어 좌우 이동
-            rb2D.velocity = new Vector2(inputMove.x*WALKSpeed,rb2D.velocity.y);
+              rb2D.velocity = new Vector2(inputMove.x* WalkSpeed, rb2D.velocity.y);
+          //  rb2D.velocity = new Vector2(inputMove.x * WalkSpeed,inputMove.y * WalkSpeed);
         }
 
 
-        public void OnMove(InputAction.CallbackContext context)
+        public void OnMove(InputAction.CallbackContext context)  // 공식
         {
-            inputMove = context.ReadValue<Vector2>();
+            inputMove = context.ReadValue<Vector2>();            // 공식
             Debug.Log("context:"+inputMove);
         }
 
