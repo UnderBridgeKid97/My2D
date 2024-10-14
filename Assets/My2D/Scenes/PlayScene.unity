@@ -9281,6 +9281,7 @@ GameObject:
   - component: {fileID: 1926503115}
   - component: {fileID: 1926503117}
   - component: {fileID: 1926503118}
+  - component: {fileID: 1926503119}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9395,9 +9396,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkSpeed: 4
+  runSpeed: 8
+  airSpeed: 2
   isMove: 0
   isRun: 0
   isFacingRight: 1
+  jumpForce: 10
 --- !u!114 &1926503116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9444,7 +9448,19 @@ MonoBehaviour:
     m_ActionId: 902ebbfc-4b68-460e-b66f-23c5373cdcb4
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1926503115}
+        m_TargetAssemblyTypeName: My2D.PlayerController, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bcc2f60d-b646-40b3-9251-24fd70c75265
     m_ActionName: Player/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -9503,6 +9519,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fec50d82-d0dd-42ea-b3c9-6f82f354c175
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1926503115}
+        m_TargetAssemblyTypeName: My2D.PlayerController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 639e8669-d394-4e11-bdf8-de0c8a112c71
+    m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -9540,8 +9572,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014243692, y: -0.14579785}
-  m_Size: {x: 0.6367249, y: 1.8250697}
+  m_Offset: {x: 0.014243692, y: -0.13230515}
+  m_Size: {x: 0.6367249, y: 1.7980843}
   m_Direction: 0
 --- !u!95 &1926503118
 Animator:
@@ -9564,6 +9596,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1926503119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926503111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5eedb2f6f9a429428fef983244cc3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  groundDistance: 0.05
+  wallDistance: 0.2
+  isGround: 0
+  iswall: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -9572,5 +9634,5 @@ SceneRoots:
   - {fileID: 1916860996}
   - {fileID: 519420032}
   - {fileID: 1402870751}
-  - {fileID: 1926503114}
   - {fileID: 186932160}
+  - {fileID: 1926503114}
