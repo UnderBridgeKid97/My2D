@@ -26,7 +26,10 @@ namespace My2D
         public bool IsGround
         {
             get { return isGround; }
-            private set { isGround = value; animator.SetBool(Animation.IsGround, value); }
+            private set { 
+                isGround = value; 
+                animator.SetBool(Animation.IsGround, value);
+            }
         }
 
         [SerializeField] private bool isCeiling;
@@ -44,7 +47,10 @@ namespace My2D
         public bool Iswall
         {
             get { return iswall; }
-            private set { iswall = value; animator.SetBool(Animation.Iswall , value); }
+            private set {
+                iswall = value; 
+                animator.SetBool(Animation.Iswall , value);
+            }
         }
         private Vector2 walkDirection => (transform.localScale.x >0)? Vector2.right : Vector2.left;
 
@@ -59,8 +65,9 @@ namespace My2D
         private void FixedUpdate()
         {
             IsGround = touchingColldier.Cast(Vector2.down, contactFilter, groundHits, groundDistance) > 0;
+            IsCeiling = touchingColldier.Cast(Vector2.up, /* or ,Vector2.right*/ contactFilter, ceilingHits, ceilingDistance) > 0;
             Iswall = touchingColldier.Cast(walkDirection, /* or ,Vector2.right*/ contactFilter, wallHits, wallDistance) > 0;
-            IsCeiling = touchingColldier.Cast(Vector2.left, /* or ,Vector2.right*/ contactFilter, wallHits, ceilingDistance) > 0;
+          
         }
 
     }
