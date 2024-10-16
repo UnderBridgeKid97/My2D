@@ -80,7 +80,7 @@ namespace My2D
         private void Update()
         {
             // 적 감지 충돌체의 리스트 개수가 0보다 크면 적이 감지 된 것 
-            HasTarget = (detectionZone.detectedColliders.Count > 0);
+           HasTarget = (detectionZone.detectedColliders.Count > 0);
         }
 
 
