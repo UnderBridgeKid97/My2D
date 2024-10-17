@@ -11,10 +11,12 @@ namespace My2D
         private Rigidbody2D rb2D;
         private Animator animator;
         private TouchingDirections touchingDirections;
+        private Damagerble damagerble;
+
         // 플레이어 감지
         public DetectionZone detectionZone;
-
-
+        // 낭떨어지 감지
+        public DetectionZone detectionCliff;
         // 이동 속도
         [SerializeField] private float runSpeed = 4f;
         // 이동 방향
@@ -75,6 +77,11 @@ namespace My2D
             rb2D= GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             touchingDirections = GetComponent<TouchingDirections>();
+
+            damagerble = GetComponent<Damagerble>();
+            damagerble.hitAction += OnHit;
+
+            detectionCliff.noColliderRamain += OnCliffDetection;
         }
 
         private void Update()
@@ -92,19 +99,20 @@ namespace My2D
                 Flip();
             }
             
-            // 이동
-            if(CanMove)
+            if(!damagerble.LockVelocity)
             {
-                rb2D.velocity = new Vector2(directionVector.x * runSpeed, rb2D.velocity.y);
+                // 이동
+                if (CanMove)
+                {
+                    rb2D.velocity = new Vector2(directionVector.x * runSpeed, rb2D.velocity.y);
+                }
+                else
+                {
+                    // rb2.velocity.x -> 0  : lerp 멈춤 
+                    rb2D.velocity = new Vector2(Mathf.Lerp(rb2D.velocity.x, 0f, stopRate), rb2D.velocity.y);
+                }
             }
-            else
-            {
-                // rb2.velocity.x -> 0  : lerp 멈춤 
-                rb2D.velocity = new Vector2(Mathf.Lerp(rb2D.velocity.x, 0f, stopRate), rb2D.velocity.y);
-            }
-
         }
-
 
         // 방향 전환 반전
         private void Flip()
@@ -123,6 +131,18 @@ namespace My2D
             }
         }
 
+        public void OnHit(float damage, Vector2 knocback)
+        {
+            rb2D.velocity = new Vector2(knocback.x, rb2D.velocity.y + knocback.y);
+        }
+
+        public void OnCliffDetection()
+        {
+            if(touchingDirections.IsGround)
+            {
+                Flip();
+            }
+        }
 
     }
 }

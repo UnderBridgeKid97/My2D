@@ -9,6 +9,7 @@ namespace My2D
         #region Variables
         [SerializeField]private float attackDamage = 10f;
 
+        public Vector2 knocback = Vector2.zero;
         #endregion
         // 공격력
 
@@ -20,11 +21,16 @@ namespace My2D
 
             if(damageable !=null)
             {
+                // knocback의 방향 설정
+                Vector2 deliveredknocback = transform.parent.localScale.x > 0 ? knocback : new Vector2(-knocback.x,knocback.y);
+
+
                 //  Debug.Log($"{collision.name}가(이) 데미지를 입없다");
-                damageable.TakeDamage(attackDamage);
+                damageable.TakeDamage(attackDamage, deliveredknocback);
             }
         }
 
+       
 
     }
 }

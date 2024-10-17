@@ -17,6 +17,7 @@ namespace My2D
         public static string IsDeath = "IsDeath";
         public static string YVelocity = "Yvelocity";
         public static string CanMove = "CanMove";
+        public static string LockVelocity = "LockVelocity";
 
     }
 }

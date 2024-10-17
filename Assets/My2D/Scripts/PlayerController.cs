@@ -11,6 +11,7 @@ namespace My2D
         private Animator animator;
         private TouchingDirections touchingDirections;
 
+        private Damagerble damageable;
 
         // 플레이어 이동 속도
         [SerializeField] private float WalkSpeed = 4f;
@@ -133,13 +134,20 @@ namespace My2D
             animator = GetComponent<Animator>();
             
             touchingDirections=GetComponent<TouchingDirections>();
+
+            damageable = GetComponent<Damagerble>();
+            damageable.hitAction += OnHit;              // 유니티 액션 & 델리게이트 함수에 등록 
         }
 
         private void FixedUpdate()
         {
+            if (!damageable.LockVelocity)
+            {
             // 플레이어 좌우 이동
             rb2D.velocity = new Vector2(inputMove.x * currentMoveSpeed, rb2D.velocity.y);
-            //  rb2D.velocity = new Vector2(inputMove.x * WalkSpeed,inputMove.y * WalkSpeed);
+                //  rb2D.velocity = new Vector2(inputMove.x * WalkSpeed,inputMove.y * WalkSpeed);
+
+            }
 
             // 애니메이션 값
             animator.SetFloat(Animation.YVelocity,rb2D.velocity.y);
@@ -216,7 +224,10 @@ namespace My2D
             }
         }
 
-
+        public void OnHit(float damage, Vector2 knocback)
+        {
+            rb2D.velocity = new Vector2(knocback.x , rb2D.velocity.y + knocback.y);
+        }
     }
 }
 
