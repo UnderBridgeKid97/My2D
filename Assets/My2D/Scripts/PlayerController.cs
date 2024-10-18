@@ -169,6 +169,16 @@ namespace My2D
             }
         }
 
+        public void OnBowAttack(InputAction.CallbackContext context)
+        {
+            // F키 누르는 순간 시작 
+            if(context.started && touchingDirections.IsGround)
+            {
+                animator.SetTrigger(Animation.BowTrigger);
+            }
+        }
+
+
         public void OnMove(InputAction.CallbackContext context)  // 공식
         {
             inputMove = context.ReadValue<Vector2>();            // 공식

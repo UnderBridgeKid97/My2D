@@ -93,7 +93,8 @@ namespace My2D
 
         private void FixedUpdate()
         {
-            if(touchingDirections.Iswall && touchingDirections.IsGround)
+           
+            if (touchingDirections.Iswall && touchingDirections.IsGround)
             {
                 // π›¿¸
                 Flip();
@@ -104,11 +105,13 @@ namespace My2D
                 // ¿Ãµø
                 if (CanMove)
                 {
+
                     rb2D.velocity = new Vector2(directionVector.x * runSpeed, rb2D.velocity.y);
                 }
                 else
                 {
                     // rb2.velocity.x -> 0  : lerp ∏ÿ√„ 
+                    
                     rb2D.velocity = new Vector2(Mathf.Lerp(rb2D.velocity.x, 0f, stopRate), rb2D.velocity.y);
                 }
             }
