@@ -17,7 +17,7 @@ namespace My2D
         [SerializeField] private float WalkSpeed = 4f;
         [SerializeField] private float runSpeed = 8f;
         [SerializeField] private float airSpeed = 2f;
-
+      //  [SerializeField] private GameObject effctTrail;
         public float currentMoveSpeed
         {
             get
@@ -137,6 +137,7 @@ namespace My2D
 
             damageable = GetComponent<Damagerble>();
             damageable.hitAction += OnHit;              // 유니티 액션 & 델리게이트 함수에 등록 
+         //   effctTrail = GetComponent<>
         }
 
         private void FixedUpdate()
@@ -222,6 +223,10 @@ namespace My2D
                 animator.SetTrigger(Animation.JumpTrigger);
                 rb2D.velocity = new Vector2(rb2D.velocity.x,jumpForce);
             }
+          /*  if(effctTrail !=null)
+            {
+                effctTrail.
+            }*/
         }
 
         public void OnAttack(InputAction.CallbackContext context)
