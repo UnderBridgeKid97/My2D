@@ -14,7 +14,6 @@ namespace MySample
         #region Variables
 
         public List<PopUp> popupStack = new List<PopUp>();
-
         [SerializeField]private Canvas canvas;                              // 팝업메뉴의 부모 캔버스 오브젝트
 
         #endregion
@@ -46,7 +45,7 @@ namespace MySample
                 popupStack.Remove(popupClose);
                 if(popupStack.Count > 0 )
                 {
-                    var popup = popupStack.Last<PopUp>();
+                    var popup = popupStack.Last();
                     popup.Show();
                 }
             }

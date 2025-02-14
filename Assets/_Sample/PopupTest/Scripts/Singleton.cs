@@ -2,37 +2,35 @@ using UnityEngine;
 
 namespace MySample
 {
-    public class PersistentSingleton<T> : MonoBehaviour where T : MonoBehaviour
+    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         private static T instance;
+
         public static T Instance
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<T>();
-                    if (instance == null)
-                    {
-                        GameObject singletonObj = new GameObject(typeof(T).Name);
-                        instance = singletonObj.AddComponent<T>();
-                        DontDestroyOnLoad(singletonObj);  // 씬 전환 시 파괴되지 않게 설정
-                    }
-                }
-                return instance;
-            }
+            get { return instance; }
+        }
+
+        public static bool InstancExist
+        {
+            get { return instance != null; }
         }
 
         protected virtual void Awake()
         {
-            if (instance == null)
+            if (InstancExist)
             {
-                instance = this as T;
-                DontDestroyOnLoad(gameObject);
+                Destroy(this.gameObject);
+                return;
             }
-            else
+            instance = (T)this;            
+        }
+
+        protected virtual void OnDestroy()
+        {
+            if(instance == this)
             {
-                Destroy(gameObject);  // 중복된 인스턴스 제거
+                instance = null;
             }
         }
     }

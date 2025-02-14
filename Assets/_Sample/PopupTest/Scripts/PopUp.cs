@@ -27,6 +27,7 @@ namespace MySample
 
      // ===========================================
         public delegate void PopupEvents(PopUp popup); // 델리게이트 함수
+
         public static event PopupEvents OnOpenPopup; 
         public static event PopupEvents OnClosePopup;
         public static event PopupEvents OnBeforeClosePopup; // 닫기 직전에 호출되는 
@@ -46,7 +47,7 @@ namespace MySample
             }
         }
 
-        //제네릭함수 /       만약 저 것들이  없으면(매개변수가 없으면) 그냥 실행 하는 = null
+        // 제네릭함수 /       만약 저 것들이  없으면(매개변수가 없으면) 그냥 실행 하는 = null
         public void Show<T>(Action OnShow = null, Action<popupResult> OnClose = null) 
         {
             if(OnShow != null)
@@ -68,31 +69,31 @@ namespace MySample
                 animator.Play("popup_Show");
             }
         }
-//  ============================================================================
-        // show 애니메이션 중간에 이벤트 함수 등록하여 등장 효과음 재생 
+
+        //Show 애니메이션 중간에 이벤트 함수 등록하여 등장 효과음 재생
         public virtual void ShowAnimationSound()
         {
-            // TODO: 등장 효과음 재생  -> 하고싶으면 구현 ㄱㄱ
+            //TODO: 등장 효과음 재생
         }
-        // hide 애니메이션 중간에 이벤트 함수 등록하여 등장 효과음 재생 
-        public virtual void CloseAnimationSound()
-        {
-            // TODO: 퇴장 효과음 재생  -> 하고싶으면 구현 ㄱㄱ
-        }
-// =============================================================================
 
-        // show 애니메이션 마지막에 이벤트 함수 등록하여 호출
+        //Show 애니메이션 마지막에 이벤트 함수 등록하여 호출
         public virtual void AfterShowAnimation()
         {
             OnShowAction?.Invoke();
         }
 
-        // hide 애니메이션 마지막에 이벤트 함수 등록하여 호출
-        public virtual void AfterHideAniation()
+        //Hide 애니메이션 중간에 이벤트 함수 등록하여 퇴장 효과음 재생
+        public virtual void HideAnimationSound()
         {
-           OnClosePopup?.Invoke(this);
-           OnCloseAction?.Invoke(result);
-           Destroy(gameObject,0.5f); // 
+            //TODO: 퇴장 효과음 재생
+        }
+
+        //Hide 애니메이션 마지막에 이벤트 함수 등록하여 호출
+        public virtual void AfterHideAnimation()
+        {
+            OnClosePopup?.Invoke(this);
+            OnCloseAction?.Invoke(result);
+            Destroy(gameObject, 0.5f);
         }
 
         public virtual void Close() // 다른곳에서 불러 쓸떄 오버라이드 해서 기능 추가 

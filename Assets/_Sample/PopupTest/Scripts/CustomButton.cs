@@ -40,7 +40,7 @@ namespace MySample
                 return; 
             }
 
-            // TODO: 누르느느 효과음 재생  (쓰려면)
+            // TODO: 누르는 효과음 재생  (쓰려면)
             
 
             press();
